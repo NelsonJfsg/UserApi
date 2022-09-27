@@ -1,4 +1,4 @@
-import {user} from '../../Models/user';
+import {User} from '../../Models/User';
 import {Body, Param, Post, Controller } from '@nestjs/common';
 
 @Controller('user')
@@ -10,7 +10,7 @@ export class UserController {
     }
 
     @Post()
-    Create (@Body() params: user):void{
+    Create (@Body() params: User):void{
         console.log(
             "name: " + params.name + 
             "email: " + params.email + 
