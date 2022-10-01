@@ -1,4 +1,4 @@
-import { Body, Controller, Get, Param, Post } from '@nestjs/common';
+import { Body, Controller, Get, Param, Post, Put } from '@nestjs/common';
 import { UserService } from './user.service';
 import { User } from 'src/models/User';
 
@@ -7,10 +7,9 @@ export class UserController {
 
     //Init
     constructor(private userService : UserService){
-        //ASdasdasdasd
+    
     }
 
-    //Test
     @Post()
     Create(@Body() user : User ) : void{
         this.userService.create(user);
@@ -28,6 +27,14 @@ export class UserController {
 
         return user ?? "User doesnt exists.";
 
+    }
+
+    @Put('/updateUser/:id')
+    updateUserById(@Param('id') userId, @Body() user : User) : boolean {
+        
+        this.userService.updateUserById(userId, user);
+        
+        return true;
     }
 
 

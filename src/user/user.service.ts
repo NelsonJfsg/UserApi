@@ -25,4 +25,52 @@ export class UserService {
     
     }
 
+    getById(id : number) : User{
+
+        const userIndex = this.userList.findIndex((user) => user.id == id);
+        
+        const selectedUser = {...this.userList[userIndex]};
+
+        console.log(`Selected user: ` + selectedUser);
+
+        return selectedUser;
+
+
+    }
+
+    updateUserById(id : number, newUser : User){
+
+        let user = this.getById(id); //user of db
+
+        let editedUser = this.updateUserInfo(user, newUser);
+
+        
+    }
+
+    updateUserInfo(user : User, newUser : User) : User{
+
+        let editedUser = {...user};
+
+        if(newUser.name != ""){
+            console.log("asdasdads");
+            editedUser.name = newUser.name;
+        }
+        
+        if(newUser.email != ""){
+            console.log("asdasdads");
+            editedUser.email = newUser.email;
+        }
+        
+        if(newUser.cellphone != ""){
+            console.log("asdasdads");
+            editedUser.cellphone = newUser.cellphone;
+        }
+        
+        console.log(`Edited user name: ${editedUser.name}`);
+        console.log(`Edited user email: ${editedUser.email}`);
+        console.log(`Edited user cellphone: ${editedUser.cellphone}`);
+        
+        return editedUser;
+    }
+
 }
