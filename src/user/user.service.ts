@@ -31,44 +31,40 @@ export class UserService {
         
         const selectedUser = {...this.userList[userIndex]};
 
-        console.log(`Selected user: ` + selectedUser);
-
         return selectedUser;
 
 
     }
 
-    updateUserById(id : number, newUser : User){
+    updateUserById(id : number, newUser : User) : User{
+
+        const userIndex = this.userList.findIndex((user) => user.id == id);
 
         let user = this.getById(id); //user of db
 
         let editedUser = this.updateUserInfo(user, newUser);
 
+        let {id : identify, name : newName, email : newEmail, cellphone : newCellphone} = editedUser;
         
+        //updateList
+        this.userList[userIndex] = {
+            id : identify,
+            name : newName,
+            email : newEmail,
+            cellphone : newCellphone,
+        }
+
+        return editedUser;
+
     }
 
     updateUserInfo(user : User, newUser : User) : User{
 
-        let editedUser = {...user};
+        let editedUser = {...user}; //Copy user
 
-        if(newUser.name != ""){
-            console.log("asdasdads");
-            editedUser.name = newUser.name;
-        }
-        
-        if(newUser.email != ""){
-            console.log("asdasdads");
-            editedUser.email = newUser.email;
-        }
-        
-        if(newUser.cellphone != ""){
-            console.log("asdasdads");
-            editedUser.cellphone = newUser.cellphone;
-        }
-        
-        console.log(`Edited user name: ${editedUser.name}`);
-        console.log(`Edited user email: ${editedUser.email}`);
-        console.log(`Edited user cellphone: ${editedUser.cellphone}`);
+        newUser.name != "" ? (editedUser.name = newUser.name) : "";
+        newUser.email != "" ? (editedUser.email = newUser.email) : "";
+        newUser.cellphone != "" ? (editedUser.cellphone = newUser.cellphone) : "";
         
         return editedUser;
     }

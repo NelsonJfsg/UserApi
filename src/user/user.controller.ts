@@ -30,12 +30,17 @@ export class UserController {
     }
 
     @Put('/updateUser/:id')
-    updateUserById(@Param('id') userId, @Body() user : User) : boolean {
+    updateUserById(@Param('id') userId, @Body() user : User) : User {
         
-        this.userService.updateUserById(userId, user);
-        
-        return true;
-    }
+        /**
+         * Para ejecutar el programa hay que pasarle 
+         * un objeto User en formato json.
+         * El id no se puede editar, emulando a un index de una db.
+         */
 
+        console.log(userId);
+
+        return this.userService.updateUserById(userId, user);
+    }
 
 }
