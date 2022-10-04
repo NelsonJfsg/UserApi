@@ -1,4 +1,4 @@
-import { Body, Controller, Get, Param, Post } from '@nestjs/common';
+import { Body, Controller, Get, Param, Post, Put } from '@nestjs/common';
 import { UserService } from './user.service';
 import { User } from 'src/models/User';
 
@@ -7,7 +7,7 @@ export class UserController {
 
     //Init
     constructor(private userService : UserService){
-
+    
     }
 
     //
@@ -30,5 +30,18 @@ export class UserController {
 
     }
 
+    @Put('/updateUser/:id')
+    updateUserById(@Param('id') userId, @Body() user : User) : User {
+        
+        /**
+         * Para ejecutar el programa hay que pasarle 
+         * un objeto User en formato json.
+         * El id no se puede editar, emulando a un index de una db.
+         */
+
+        console.log(userId);
+
+        return this.userService.updateUserById(userId, user);
+    }
 
 }
